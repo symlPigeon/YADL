@@ -1,19 +1,50 @@
 body {
     font-family: WenQuanYi Micro Hei, sans-serif;
-    font-weight: 600;
+    font-weight: bold;
+    font-size: 36px;
     text-align: center;
-    font-size: 28px;
     user-select: none;
     margin: 2px;
     padding: 0%;
     -webkit-user-select: none;
     -webkit-app-region: drag;
-    background: rgba(0, 0, 0, 0.2);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background: rgba(0, 0, 0, 0);
 }
 
 div {
-    display: block;
-    padding: 9px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+p {
+    margin: 0 auto;
+}
+
+.lyric {
+    display: inline;
+    word-break: keep-all;
+    text-align: center;
+    padding-top: 0px;
     border-radius: 6px;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0);
+    color: rgb(85, 164, 255);
+    text-shadow: #fc0 1px 0 5px;
+}
+
+.pin {
+    height: 40px;
+    width: 40px;
+    padding-left: 1ch;
+    filter: invert(69%) sepia(32%) saturate(7082%) hue-rotate(191deg) brightness(103%) contrast(101%);
+    -webkit-app-region: no-drag;
+}
+
+button {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
 }

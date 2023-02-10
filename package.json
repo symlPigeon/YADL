@@ -1,19 +1,17 @@
 {
-  "name": "ypmdl",
-  "version": "0.0.1",
-  "description": "Desktop Lyrics for Yesplaymusic.",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "electron .",
-    "debug": "nodemon --watch src --exec electron ."
-  },
-  "author": "symlpigeon",
-  "license": "MIT",
-  "devDependencies": {
-    "electron": "^23.0.0",
-    "nodemon": "^2.0.20"
-  },
-  "dependencies": {
-    "dbus": "^1.0.7"
-  }
+    "name": "ypmdl",
+    "version": "0.0.1",
+    "description": "Desktop Lyrics for Yesplaymusic.",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "electron .",
+        "debug": "ELECTRON_ENABLE_LOGGING=true nodemon --watch src --exec electron ."
+    },
+    "repository": "https://github.com/symlPigeon/YPMDL.git",
+    "author": "symlpigeon",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^23.0.0",
+        "nodemon": "^2.0.20"
+    }
 }

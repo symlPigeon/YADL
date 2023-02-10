@@ -12,14 +12,16 @@ let tlyrics_text = null; // 翻译的歌词
 let progress = 0; // 进度
 let current_idx = 0; // 当前下标
 let next_time = 0; // 下一句歌词的时间
+let offset = 0.5; // 歌词偏移量
 
 function resizeWindow() {
     // 要是歌词栏高度超过了窗口高度的话，稍微拉一下。
-    var lyrics_div = document.getElementById("lyric");
-    var height = lyrics_div.offsetHeight;
-    //if (height > window.innerHeight) {
-    lyricsapi.resizeLyricsWindow(height);
-    //}
+    var lyrics_div = document.getElementById("all");
+    var height = lyrics_div.offsetHeight + 20;
+    if (height != window.innerHeight) {
+        // 宽度别拉，会出奇怪的问题……
+        lyricsapi.resizeLyricsWindow(height, window.innerWidth);
+    }
 }
 
 function getTranslationLine() {
@@ -83,8 +85,9 @@ function updateLyricsLine() {
             if (next_index < lyc_length) {
                 // 还有下一句歌词
                 if (progress < lyrics_text[next_index][0]) {
-                    // 还没到，等下一句歌词到了再更新
+                    // 还没到下一句歌词，不要等下一句歌词到了再更新
                     next_update = (next_time - progress) * 1000;
+                    setLyrics(); // 防止出现开始的时候歌词不显示的问题
                 } else {
                     // 到了
                     var next_2_index = next_index + 1;
@@ -227,7 +230,7 @@ async function getPlayerInfo() {
                 songId = currentTrack.id;
                 songAlb = currentTrack.al?.name || "";
                 // 获取当前播放进度
-                progress = data.progress;
+                progress = data.progress + offset;
             }
             return sameSong;
         });
