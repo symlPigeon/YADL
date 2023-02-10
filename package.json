@@ -9,7 +9,7 @@
     },
     "repository": "https://github.com/symlPigeon/YPMDL.git",
     "author": "symlpigeon",
-    "license": "MIT",
+    "license": "WTFPL",
     "devDependencies": {
         "electron": "^23.0.0",
         "nodemon": "^2.0.20"
