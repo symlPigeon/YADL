@@ -32,7 +32,7 @@
 
 ## 嫖来的部分
 
-歌词显示部分中，**严重参考**[https://github.com/shih-liang/YesPlayMusicOSD]中的部分代码。
+歌词显示部分中，**严重参考**https://github.com/shih-liang/YesPlayMusicOSD 中的部分代码。
 
 ## build && run
 
