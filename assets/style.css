@@ -1,0 +1,19 @@
+body {
+    font-family: WenQuanYi Micro Hei, sans-serif;
+    font-weight: 600;
+    text-align: center;
+    font-size: 28px;
+    user-select: none;
+    margin: 2px;
+    padding: 0%;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+div {
+    display: block;
+    padding: 9px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+}
