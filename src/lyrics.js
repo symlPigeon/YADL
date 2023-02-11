@@ -14,6 +14,7 @@ let current_idx = 0; // 当前下标
 let next_time = 0; // 下一句歌词的时间
 let offset = 0.5; // 歌词偏移量
 
+
 function resizeWindow() {
     // 要是歌词栏高度超过了窗口高度的话，稍微拉一下。
     var lyrics_div = document.getElementById("all");

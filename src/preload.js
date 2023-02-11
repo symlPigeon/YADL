@@ -20,4 +20,8 @@ contextBridge.exposeInMainWorld("lyricsapi", {
             ipcRenderer.send("mouseEvents", false);
         }
     },
+    toggleButtonStatus: (callback, status) => {
+        console.log("toggleButtonStatus" + status);
+        ipcRenderer.on("toggleButtonStatus", callback);
+    },
 });

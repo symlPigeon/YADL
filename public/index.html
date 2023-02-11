@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../assets/style.css"></link>
@@ -6,10 +7,15 @@
 </head>
 
 <body onload="updateInfo()">
-    <div align="left" id="all"> 
-        <button id="toggle-pinned" class="click-through"><img src="../assets/pin.svg" class="pin"></button>
+    <div align="left" id="all">
+        <div align="left" id="all">
+            <button id="ignore-click">
+                <img src="../assets/pin.svg" class="pin"/>
+            </button>
+        </div> 
         <div id="lyric" class="lyric"><p>Enjoy Coding with Music!</p></div>
     </div>
     <script src="../src/lyrics.js"></script>
-    <script src="../src/pin.js"></script>
+    <script src="../src/index_pin.js"></script>
 </body>
+</html> 

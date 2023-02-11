@@ -34,6 +34,8 @@
 
 歌词显示部分中，**严重参考**[https://github.com/shih-liang/YesPlayMusicOSD]中的部分代码。
 
+然后感谢互联网，让我一个小时速成JS。
+
 ## build && run
 
 没啥复杂的依赖，随便build一下应该就好了。
@@ -48,9 +50,11 @@
 
 ![](README.assets/example2.jpg)
 
+![](README.assets/example3.png)
+
 窗口能够用鼠标拖动的呢，好厉害！
 
-看到左上角那个图钉没？点一下，窗口就能够固定住啦！好厉害哦！~~坏消息是，暂时取消不掉。~~
+看到左上角那个图钉没？点一下，窗口就能够固定住啦！好厉害哦！
 
 ## 亲爱的bug们
 
@@ -58,7 +62,10 @@
 
 现在用的话可能会引发的bug包括但不限于歌词不能够正常显示、程序卡死、格式错乱、时间轴错乱~~、重新滚Arch、电脑爆炸、太阳氦闪、三体人入侵~~等。
 
-目前最主要的问题是electron的`BrowserWindow.setIgnoreMouseEvent()`API中的`forward`选项在Linux下无法使用，导致窗口锁定之后无法解锁。暂时考虑通过一些奇技淫巧来把这个问题给修掉。
+~~目前最主要的问题是electron的`BrowserWindow.setIgnoreMouseEvent()`API中的`forward`选项在Linux下无法使用，导致窗口锁定之后无法解锁。暂时考虑通过一些奇技淫巧来把这个问题给修掉。~~
+
+- 在没有启动YesPlayMusic的情况下启动YPMDL会导致某些不可预料的事情发生。
+- 如果启动了某些默认置顶的程序，可能会发生一些奇怪的事情。
 
 ## LICENSE
 
