@@ -32,7 +32,7 @@
 
 ## 嫖来的部分
 
-歌词显示部分中，**严重参考**[https://github.com/shih-liang/YesPlayMusicOSD]中的部分代码。
+歌词显示部分中，**严重参考**https://github.com/shih-liang/YesPlayMusicOSD 中的部分代码。
 
 然后感谢互联网，让我一个小时速成JS。
 
@@ -60,7 +60,7 @@
 
 **大量bug，海量bug，巨大多bug。**
 
-现在用的话可能会引发的bug包括但不限于歌词不能够正常显示、程序卡死、格式错乱、时间轴错乱~~、重新滚Arch、电脑爆炸、太阳氦闪、三体人入侵~~等。
+现在用的话可能会引发的bug包括但不限于歌词不能够正常显示、程序卡死、格式错乱、时间轴错乱、重新滚Arch、电脑爆炸、太阳氦闪、三体人入侵等。
 
 ~~目前最主要的问题是electron的`BrowserWindow.setIgnoreMouseEvent()`API中的`forward`选项在Linux下无法使用，导致窗口锁定之后无法解锁。暂时考虑通过一些奇技淫巧来把这个问题给修掉。~~
 
