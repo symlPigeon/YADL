@@ -3,14 +3,26 @@
 
 use std::collections::HashMap;
 
-use app::{lyrics_provider::{self, dbus_searcher::get_current_playing_position}, metadata::Metadata};
+use app::{lyrics_provider::{self, dbus_searcher::{get_current_playing_position, get_playback_status}}, metadata::Metadata};
 
-#[derive(Default)]
 struct PlayingInfo {
     metadata: Metadata,
     provider: String,
     cached_lyrics: HashMap<i64, String>,
     position: i64,
+    last_update_time: std::time::Instant
+}
+
+impl Default for PlayingInfo {
+    fn default() -> Self {
+        Self {
+            metadata: Metadata::default(),
+            provider: String::default(),
+            cached_lyrics: HashMap::default(),
+            position: 0,
+            last_update_time: std::time::Instant::now()
+        }
+    }
 }
 
 #[derive(Default)]
@@ -41,12 +53,20 @@ async fn updata_playing_info(playing_state: tauri::State<'_, CachedPlayingInfo>)
         inner_playing_info.metadata = metadata;
         inner_playing_info.provider = provider.to_string();
         inner_playing_info.cached_lyrics.clear();
+        inner_playing_info.last_update_time = std::time::Instant::now();
         // Update lyrics
         // update_lyrics();
     }
     // Update position
-    let position = get_current_playing_position(provider).await.unwrap_or(0);
-    inner_playing_info.position = position;
+    let mut position = get_current_playing_position(provider).await.unwrap_or(0);
+    if position == inner_playing_info.position && get_playback_status(provider).await.unwrap_or("Playing".to_string()) != "Paused" {
+        // is playing and dbus not updated
+        position += inner_playing_info.last_update_time.elapsed().as_micros() as i64;
+    } else {
+        inner_playing_info.position = position;
+        inner_playing_info.last_update_time = std::time::Instant::now();
+    }
+    
 
     // Update lyrics according to the position
     let current_time_readable = {

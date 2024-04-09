@@ -101,7 +101,15 @@ pub async fn get_playing_metadata(provider: &str) -> Option<Metadata> {
 
 pub async fn get_current_playing_position(provider: &str) -> Option<i64> {
     let connection = Connection::session().await.unwrap();
-    let resp = connection.call_method(Some(format!("org.mpris.MediaPlayer2.{}", provider)), "/org/mpris/MediaPlayer2", Some("org.freedesktop.DBus.Properties"), "Get", &("org.mpris.MediaPlayer2.Player", "Position")).await;
+    let resp = connection
+        .call_method(
+            Some(format!("org.mpris.MediaPlayer2.{}", provider)),
+            "/org/mpris/MediaPlayer2",
+            Some("org.freedesktop.DBus.Properties"),
+            "Get",
+            &("org.mpris.MediaPlayer2.Player", "Position"),
+        )
+        .await;
     let resp = match resp {
         Ok(resp) => resp.body(),
         Err(e) => {
@@ -112,4 +120,27 @@ pub async fn get_current_playing_position(provider: &str) -> Option<i64> {
     let position: zbus::zvariant::Value = resp.deserialize().unwrap();
     let position = i64::try_from(position).unwrap();
     Some(position)
+}
+
+pub async fn get_playback_status(provider: &str) -> Option<String> {
+    let connection = Connection::session().await.unwrap();
+    let resp = connection
+        .call_method(
+            Some(format!("org.mpris.MediaPlayer2.{}", provider)),
+            "/org/mpris/MediaPlayer2",
+            Some("org.freedesktop.DBus.Properties"),
+            "Get",
+            &("org.mpris.MediaPlayer2.Player", "PlaybackStatus"),
+        )
+        .await;
+    let resp = match resp {
+        Ok(resp) => resp.body(),
+        Err(e) => {
+            eprintln!("{:#?}", e);
+            return None;
+        }
+    };
+    let status: zbus::zvariant::Value = resp.deserialize().unwrap();
+    let status = Str::try_from(status).unwrap();
+    Some(status.into())
 }
