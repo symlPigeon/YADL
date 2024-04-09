@@ -21,6 +21,7 @@
     </div>
     <script>
         const { invoke } = window.__TAURI__.tauri;
+        const { emit } = window.__TAURI__.event;
         // set a timer to update lyrics every 100ms
         setInterval(() => {
             invoke("updata_playing_info", {})
@@ -28,6 +29,14 @@
                     document.getElementById("lyric").innerHTML = resp;
                 })
         }, 10);
+
+        // listen to window resize
+        window.addEventListener("resize", () => {
+            emit("window_resized", {})
+        });
+        window.addEventListener("drag", () => {
+            emit("window_dragged", {})
+        });
     </script>
 </body>
 
