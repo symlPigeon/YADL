@@ -16,7 +16,8 @@
             "all": false,
             "window": {
                 "all": false,
-                "startDragging": true
+                "startDragging": true,
+                "setIgnoreCursorEvents": true
             }
         },
         "bundle": {
@@ -67,7 +68,21 @@
                 "transparent": true,
                 "alwaysOnTop": true,
                 "decorations": false,
-                "skipTaskbar": true
+                "skipTaskbar": true,
+                "label": "main",
+                "url": "index.html"
+            },
+            {
+                "fullscreen": false,
+                "height": 40,
+                "resizable": true,
+                "width": 40,
+                "transparent": false,
+                "alwaysOnTop": true,
+                "decorations": false,
+                "skipTaskbar": true,
+                "label": "pin",
+                "url": "pin.html"
             }
         ]
     }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="/assets/style.css"></link>
+        <title></title>
+    </head>
+    <body>
+        <div align="left" id="all">
+            <button id="toggle-pinned">
+                <img src="/assets/pin.svg" class="pin" style="visibility:hidden"/>
+            </button>
+        </div>
+        <script>
+            const { invoke } = window.__TAURI__.tauri;
+            const togglePinnedBtn = document.getElementById("toggle-pinned");
+            togglePinnedBtn.addEventListener("click", () => {
+                invoke("toggle_window_pinned", {}).then((resp) => {
+                    console.log("toggle_window_pinned response: ", resp);
+                })
+            })
+        </script>
+    </body>
+</html>
