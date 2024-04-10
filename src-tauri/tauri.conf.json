@@ -70,19 +70,21 @@
                 "decorations": false,
                 "skipTaskbar": true,
                 "label": "main",
-                "url": "index.html"
+                "url": "index.html",
+                "fileDropEnabled": false
             },
             {
                 "fullscreen": false,
                 "height": 40,
                 "resizable": true,
                 "width": 40,
-                "transparent": false,
+                "transparent": true,
                 "alwaysOnTop": true,
                 "decorations": false,
                 "skipTaskbar": true,
                 "label": "pin",
-                "url": "pin.html"
+                "url": "pin.html",
+                "fileDropEnabled": false
             }
         ]
     }

@@ -51,3 +51,9 @@ Currently, under develop mode, we can pass such environment variables to force t
 ```bash
 WEBKIT_DISABLE_COMPOSITING_MODE=1 GDK_BACKEND=x11 npm run tauri dev
 ```
+
+### Blur Frame
+
+Sometimes, a strange problem may occur: sometimes the window will be displayed with a blur frame. We are not sure what causes this problem, but we think it also comes from the upstream library.
+
+Sadly, there's no solution for this problem yet. Restart the application may help.

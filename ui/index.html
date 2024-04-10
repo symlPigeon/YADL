@@ -10,7 +10,7 @@
 
 <body>
     <div align="left" id="all">
-        <div align="left" id="all"  data-tauri-drag-region>
+        <div align="left" id="all">
             <button id="ignore-click">
                 <img src="/assets/pin.svg" class="pin" />
             </button>
@@ -21,21 +21,22 @@
     </div>
     <script>
         const { invoke } = window.__TAURI__.tauri;
-        const { emit } = window.__TAURI__.event;
+        const { listen } = window.__TAURI__.event;
+        // after the window is loaded, sync the window position
+        invoke("sync_window_position", {});
+        invoke("background_update_position", {});
         // set a timer to update lyrics every 100ms
         setInterval(() => {
             invoke("updata_playing_info", {})
                 .then((resp) => {
                     document.getElementById("lyric").innerHTML = resp;
                 })
-        }, 10);
-
-        // listen to window resize
-        window.addEventListener("resize", () => {
-            emit("window_resized", {})
+        }, 100);
+        addEventListener("resize", (event) => {
+            invoke("sync_window_position", {});
         });
-        window.addEventListener("drag", () => {
-            emit("window_dragged", {})
+        listen("update_position", (event) => {
+            invoke("sync_window_position", {});
         });
     </script>
 </body>

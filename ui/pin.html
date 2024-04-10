@@ -19,6 +19,9 @@
                     console.log("toggle_window_pinned response: ", resp);
                 })
             });
+            addEventListener("resize", (event) => {
+                invoke("reset_pin_window_size", {}); 
+            });
         </script>
     </body>
 </html>
