@@ -38,6 +38,14 @@
         listen("update_position", (event) => {
             invoke("sync_window_position", {});
         });
+        listen("toggle_pinned", (event) => {
+            const pin = document.getElementById("ignore-click");
+            if (event.payload) {
+                pin.innerHTML = '<img src="/assets/unpin.svg" class="pin" />';
+            } else {
+                pin.innerHTML = '<img src="/assets/pin.svg" class="pin" />';
+            }
+        }); 
     </script>
 </body>
 

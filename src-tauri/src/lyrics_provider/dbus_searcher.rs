@@ -67,7 +67,7 @@ pub async fn get_playing_metadata(provider: &str) -> Option<Metadata> {
             }
         };
 
-    let mut song_metadata = Metadata::new("".into(), "".into(), "".into(), "".into(), 0);
+    let mut song_metadata = Metadata::new("".into(), "".into(), "".into(), "".into(), 0, "".into());
 
     for (key, value) in metadata.iter() {
         match key as &str {
@@ -91,6 +91,10 @@ pub async fn get_playing_metadata(provider: &str) -> Option<Metadata> {
                 let artist_field = zbus::zvariant::Array::try_from(value).unwrap();
                 let artist = Str::try_from(&artist_field[0]).unwrap();
                 song_metadata.artist = artist.into();
+            },
+            "xesam:url" => {
+                let song_url = Str::try_from(value).unwrap();
+                song_metadata.song_url = song_url.into();
             }
             _ => {}
         }

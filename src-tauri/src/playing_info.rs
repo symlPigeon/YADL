@@ -1,11 +1,10 @@
-use std::collections::HashMap;
-
 use crate::{lyrics_provider, metadata::Metadata};
 
 pub struct PlayingInfo {
     pub metadata: Metadata,
     pub provider: String,
-    pub cached_lyrics: HashMap<i64, String>,
+    pub cached_lyrics: Vec<(i64, String)>,
+    pub cached_tlyrics: Vec<(i64, String)>,
     pub position: i64,
     pub last_update_time: std::time::Instant,
 }
@@ -15,7 +14,8 @@ impl Default for PlayingInfo {
         Self {
             metadata: Metadata::default(),
             provider: String::default(),
-            cached_lyrics: HashMap::default(),
+            cached_lyrics: Vec::new(),
+            cached_tlyrics: Vec::new(),
             position: 0,
             last_update_time: std::time::Instant::now(),
         }
@@ -59,7 +59,13 @@ pub async fn updata_playing_info(
         inner_playing_info.cached_lyrics.clear();
         inner_playing_info.last_update_time = std::time::Instant::now();
         // Update lyrics
-        // update_lyrics();
+        let (lyrics, tlyrics) =
+            lyrics_provider::lyrics_fetcher::get_lyrics(provider, &inner_playing_info.metadata)
+                .await;
+        println!("Lyrics: {:#?}", lyrics);
+        println!("TLyrics: {:#?}", tlyrics);
+        inner_playing_info.cached_lyrics = lyrics;
+        inner_playing_info.cached_tlyrics = tlyrics;
     }
     // Update position
     let mut position = lyrics_provider::dbus_searcher::get_current_playing_position(provider)
@@ -79,16 +85,34 @@ pub async fn updata_playing_info(
     }
 
     // Update lyrics according to the position
-    let current_time_readable = {
-        let seconds = position / 1_000_000;
-        let milliseconds = (position % 1_000_000) / 1_000;
-        let minutes = seconds / 60;
-        let seconds = seconds % 60;
-        format!("{:02}:{:02}.{:03}", minutes, seconds, milliseconds)
-    };
+    let current_lyric_upper = inner_playing_info
+        .cached_lyrics
+        .windows(2)
+        .find_map(|lyric| {
+            let (prev_lyric, post_lyric) = (lyric[0].clone(), lyric[1].clone());
+            if prev_lyric.0 <= position / 1000 && post_lyric.0 > position / 1000 {
+                Some(prev_lyric.1)
+            } else {
+                None
+            }
+        })
+        .unwrap_or(inner_playing_info.metadata.title.clone());
+    let current_lyric_lower = inner_playing_info
+        .cached_tlyrics
+        .windows(2)
+        .find_map(|lyric| {
+            let (prev_lyric, post_lyric) = (lyric[0].clone(), lyric[1].clone());
+            if prev_lyric.0 <= position / 1000 && post_lyric.0 > position / 1000 {
+                Some(prev_lyric.1)
+            } else {
+                None
+            }
+        })
+        .unwrap_or(inner_playing_info.metadata.artist.clone());
+
     let lyrics = format!(
-        "<p data-tauri-drag-region>{}!</p><p data-tauri-drag-region>Now position {}</p>",
-        inner_playing_info.metadata.title, current_time_readable
+        "<p data-tauri-drag-region>{}</p><p data-tauri-drag-region>{}</p>",
+        current_lyric_upper, current_lyric_lower
     );
     Ok(lyrics)
 }
