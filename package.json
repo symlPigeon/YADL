@@ -4,14 +4,12 @@
     "description": "Desktop Lyrics for Yesplaymusic.",
     "main": "src/index.js",
     "scripts": {
-        "start": "electron .",
-        "debug": "ELECTRON_ENABLE_LOGGING=true nodemon --watch src --exec electron ."
+        "tauri": "tauri"
     },
     "repository": "https://github.com/symlPigeon/YPMDL.git",
     "author": "symlpigeon",
     "license": "WTFPL",
     "devDependencies": {
-        "electron": "^23.0.0",
-        "nodemon": "^2.0.20"
+        "@tauri-apps/cli": "^1.5.11"
     }
 }

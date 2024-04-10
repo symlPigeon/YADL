@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/assets/style.css">
+    </link>
+    <title>Enjoy Coding</title>
+</head>
+
+<body>
+    <div align="left" id="all">
+        <div align="left" id="all">
+            <button id="ignore-click">
+                <img src="/assets/pin.svg" class="pin" />
+            </button>
+        </div>
+        <div id="lyric" class="lyric" data-tauri-drag-region>
+            <p>Enjoy Coding with Music!</p>
+        </div>
+    </div>
+    <script>
+        const { invoke } = window.__TAURI__.tauri;
+        const { listen } = window.__TAURI__.event;
+        // after the window is loaded, sync the window position
+        invoke("sync_window_position", {});
+        invoke("background_update_position", {});
+        // set a timer to update lyrics every 100ms
+        setInterval(() => {
+            invoke("updata_playing_info", {})
+                .then((resp) => {
+                    document.getElementById("lyric").innerHTML = resp;
+                })
+        }, 100);
+        addEventListener("resize", (event) => {
+            invoke("sync_window_position", {});
+        });
+        listen("update_position", (event) => {
+            invoke("sync_window_position", {});
+        });
+        listen("toggle_pinned", (event) => {
+            const pin = document.getElementById("ignore-click");
+            if (event.payload) {
+                pin.innerHTML = '<img src="/assets/unpin.svg" class="pin" />';
+            } else {
+                pin.innerHTML = '<img src="/assets/pin.svg" class="pin" />';
+            }
+        }); 
+    </script>
+</body>
+
+</html>
