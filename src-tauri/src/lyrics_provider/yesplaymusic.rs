@@ -32,6 +32,11 @@ pub async fn fetch_lyrics(metadata: &Metadata) -> RawLyrics {
     if body.get("pureMusic").is_some_and(|flag| flag.as_bool().unwrap_or(false)) {
         return (song_name_lyric, pure_music_lyric);
     }
+    // TODO: i'm not sure what `sgc` field means, but i guess it's related to whether lyrics exist.
+    if body.get("sgc").is_some_and(|flag| flag.as_bool().unwrap_or(false)) {
+        return (song_name_lyric, artist_lyric);
+    }
+
     let mut lyrics = (None, None);
     if let Some(lrc) = body.get("lrc") {
         if let Some(lyric) = lrc.get("lyric") {

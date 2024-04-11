@@ -1,3 +1,7 @@
+:root {
+    --max_scroll_percent: -100%;
+}
+
 body {
     font-family: WenQuanYi Micro Hei, sans-serif;
     font-weight: bold;
@@ -31,6 +35,22 @@ p {
     background: rgba(0, 0, 0, 0);
     color: rgb(85, 164, 255);
     text-shadow: #fc0 1px 0 5px;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.lyric p {
+    white-space: nowrap;
+    animation: scrollText linear infinite;
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(var(--max_scroll_percent));
+    }
 }
 
 .pin {

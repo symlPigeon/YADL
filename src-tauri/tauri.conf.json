@@ -25,7 +25,10 @@
             "category": "DeveloperTool",
             "copyright": "",
             "deb": {
-                "depends": []
+                "depends": [],
+                "files": {
+                    "/usr/share/applications/yadl.desktop": "../yadl.desktop"
+                }
             },
             "externalBin": [],
             "icon": [
