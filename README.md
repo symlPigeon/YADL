@@ -4,9 +4,26 @@ YADL is a simple desktop lyrics application that displays lyrics on your linux d
 
 ## Features
 
-- Get current playing song from MPRIS compatible media players.
+- Get current playing song from MPRIS compatible media players. 
+  - Once your media player is MPRIS compatible, YADL can get the current playing song from it.
 - Display lyrics on your desktop (if your media player gives the lyrics).
+  - Currently, we only support lyrics from YesPlayMusic.
+  - More lyrics sources will be supported in the future.
 - Features which a desktop lyrics application should have.
+
+### Screenshots
+
+Desktop lyrics, with a transparent background and a `pin` button.
+
+![](README.assets/screenshot1.jpg)
+
+![](README.assets/screenshot2.jpg)
+
+Support pure music / music without lyrics yet:
+
+![](README.assets/screenshot3.jpg)
+
+![](README.assets/screenshot4.jpg)
 
 ## Installation
 
@@ -31,8 +48,11 @@ npm run tauri dev
 To build the application, you can run:
 
 ```bash
-Not Done Yet
+cd src-tauri
+cargo tauri build
 ```
+
+This should work.
 
 ## Troubleshooting
 
