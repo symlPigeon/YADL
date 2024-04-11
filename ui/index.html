@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/assets/style.css">
     </link>
     <title>Enjoy Coding</title>
+    <script src="/js/div_scroll.js" ></script>
 </head>
 
 <body>
@@ -17,6 +18,7 @@
         </div>
         <div id="lyric" class="lyric" data-tauri-drag-region>
             <p>Enjoy Coding with Music!</p>
+            <p></p>
         </div>
     </div>
     <script>
@@ -25,11 +27,19 @@
         // after the window is loaded, sync the window position
         invoke("sync_window_position", {});
         invoke("background_update_position", {});
+        let cached_lyrics = document.getElementById("lyric").innerHTML;
         // set a timer to update lyrics every 100ms
         setInterval(() => {
             invoke("updata_playing_info", {})
                 .then((resp) => {
+                    if (resp == cached_lyrics) { // if the lyrics are the same, do not update
+                                                // otherwise scrolling lyrics may go wrong
+                        return;
+                    }
+                    cached_lyrics = resp;
                     document.getElementById("lyric").innerHTML = resp;
+                    // start animation
+                    document.querySelectorAll(".lyric p").forEach((p) => startScrolling(p));
                 })
         }, 100);
         addEventListener("resize", (event) => {

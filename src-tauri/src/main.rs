@@ -12,7 +12,7 @@ fn background_update_position(app: tauri::AppHandle) -> Result<(), String> {
             std::thread::sleep(std::time::Duration::from_millis(500));
             let current_position = main_window.inner_position().unwrap();
             if cached_position != current_position {
-                println!("Position changed: {:?}", current_position);
+                // println!("Position changed: {:?}", current_position);
                 let _ = main_window.emit("update_position", current_position);
             }
             cached_position = current_position;
