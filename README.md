@@ -61,10 +61,11 @@ This should work.
 Yes, under wayland, we may encounter many problems, such as
 - Window decoration elements are not hidden (title bar and black frame).
 - `always on top` does not work.
+- Floating window following cannot be implemented, which will destroy the function of locking the lyrics window.
 
 These problems originate from the implementation of the upstream library, so we don't have a suitable solution for the time being and can only wait for upstream updates.
 
-As an alternative, using x11 (XWayland) may be a valid solution.
+As an alternative, **using x11 (XWayland) may be a valid solution**.
 
 Currently, under develop mode, we can pass such environment variables to force the application to use x11:
 
@@ -79,3 +80,9 @@ Sometimes, a strange problem may occur: sometimes the window will be displayed w
 After testing, this problem has a high probability of occurring under Wayland and a very small probability under X11.
 
 Sadly, there's no solution for this problem yet. Restart the application may help.
+
+### Yesplaymusic Compatibility
+
+We noticed that the yesplaymusic installed in Ubuntu's snap source is a very old version (0.4.5?), which does not implement the MPRIS interface. When you use an older version, YADL may not work correctly.
+
+For normal use, please make sure you have a newer version installed.

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Categories=Development;
+Exec=env GDK_BACKEND=x11 WEBKIT_DISABLE_COMPOSITING_MODE=1 yadl
+Icon=yadl
+Name=yadl
+Terminal=false
+Type=Application
