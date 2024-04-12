@@ -91,7 +91,7 @@ pub async fn get_playing_metadata(provider: &str) -> Option<Metadata> {
                 let artist_field = zbus::zvariant::Array::try_from(value).unwrap();
                 let artist = Str::try_from(&artist_field[0]).unwrap();
                 song_metadata.artist = artist.into();
-            },
+            }
             "xesam:url" => {
                 let song_url = Str::try_from(value).unwrap();
                 song_metadata.song_url = song_url.into();
@@ -147,4 +147,19 @@ pub async fn get_playback_status(provider: &str) -> Option<String> {
     let status: zbus::zvariant::Value = resp.deserialize().unwrap();
     let status = Str::try_from(status).unwrap();
     Some(status.into())
+}
+
+pub async fn player_toggle_pause(provider: &str) {
+    let connection = Connection::session().await.unwrap();
+    // We just ignore that :(
+    // If anything wrong, blame the up stream.
+    let _ = connection
+        .call_method(
+            Some(format!("org.mpris.MediaPlayer2.{}", provider)),
+            "/org/mpris/MediaPlayer2",
+            Some("org.mpris.MediaPlayer2.Player"),
+            "PlayPause",
+            &(),
+        )
+        .await;
 }

@@ -1,0 +1,32 @@
+body {
+    text-align: center;
+    user-select: none;
+    padding: 0%;
+    margin: 2px;
+    background: rgba(0, 0, 0, 0);
+    overflow: hidden;
+}
+
+div {
+    margin: 0 auto;
+    padding: 0;
+}
+
+p {
+    margin: 0 auto;
+}
+
+.pin {
+    height: 40px;
+    width: 40px;
+    padding-left: 1ch;
+    filter: invert(69%) sepia(32%) saturate(7082%) hue-rotate(191deg) brightness(103%) contrast(101%);
+}
+
+button {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}

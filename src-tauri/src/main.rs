@@ -21,6 +21,12 @@ fn background_update_position(app: tauri::AppHandle) -> Result<(), String> {
     Ok(())
 }
 
+#[tauri::command]
+fn exit_app(app: tauri::AppHandle) -> Result<(), String> {
+    app.exit(0);
+    Ok(())
+}
+
 fn main() {
     tauri::Builder::default()
         .manage(app::playing_info::CachedPlayingInfo::default())
@@ -30,8 +36,12 @@ fn main() {
             app::pinned::toggle_window_pinned,
             app::pinned::sync_window_position,
             background_update_position,
-            app::pinned::reset_pin_window_size
+            app::pinned::reset_pin_window_size,
+            exit_app,
+            app::right_menu::toggle_pause_resume,
+            app::pinned::reset_pin_window_focus
         ])
+        .plugin(tauri_plugin_context_menu::init())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
