@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    <div align="left" id="all">
+    <div align="left" id="app_div" class="app">
         <div align="left" id="all">
             <button id="ignore-click">
                 <img src="/assets/pin.svg" class="pin" />
             </button>
         </div>
-        <div id="lyric" class="lyric" data-tauri-drag-region>
+        <div id="lyric" class="lyric">
             <p>Enjoy Coding with Music!</p>
             <p></p>
         </div>
@@ -44,7 +44,7 @@
                 })
         }, 100);
         addEventListener("resize", (event) => {
-            document.querySelectorAll(".lyric p").forEach((p) => startScrolling(p));
+            document.querySelectorAll(".lyric p").forEach((p) => resetScrolling(p));
             invoke("sync_window_position", {});
         });
         listen("update_position", (event) => {
@@ -52,10 +52,14 @@
         });
         listen("toggle_pinned", (event) => {
             const pin = document.getElementById("ignore-click");
+            const app_div = document.getElementById("app_div");
             if (event.payload) {
                 pin.innerHTML = '<img src="/assets/unpin.svg" class="pin" />';
+                app_div.className = "app-locked"
+                
             } else {
                 pin.innerHTML = '<img src="/assets/pin.svg" class="pin" />';
+                app_div.className = "app"
             }
         }); 
     </script>

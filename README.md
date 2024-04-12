@@ -19,15 +19,10 @@ Desktop lyrics, with a transparent background and a `pin` button.
 
 ![](README.assets/screenshot2.jpg)
 
-Support pure music / music without lyrics yet:
-
-![](README.assets/screenshot3.jpg)
-
-![](README.assets/screenshot4.jpg)
 
 ## Installation
 
-Not yet :(
+View Release Page.
 
 ## Complication
 
