@@ -7,6 +7,7 @@
     </link>
     <title>Enjoy Coding</title>
     <script src="/js/div_scroll.js" ></script>
+    <script src="/js/context_menu.js"></script>
 </head>
 
 <body>
@@ -43,6 +44,7 @@
                 })
         }, 100);
         addEventListener("resize", (event) => {
+            document.querySelectorAll(".lyric p").forEach((p) => startScrolling(p));
             invoke("sync_window_position", {});
         });
         listen("update_position", (event) => {

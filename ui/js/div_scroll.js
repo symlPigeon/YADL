@@ -7,7 +7,7 @@ function startScrolling(paragraph) {
     if (paragraphWidth > containerWidth) {
         const duration = ((paragraphWidth - containerWidth) / 50) * 1000; // 根据滚动距离计算滚动时间
         console.log(duration);
-        scroll_percent = 100 - (containerWidth / paragraphWidth) * 100 + 15;
+        scroll_percent = 100 - (containerWidth / paragraphWidth) * 100 + 5;
         document.documentElement.style.setProperty(
             "--max_scroll_percent",
             `-${scroll_percent}%`

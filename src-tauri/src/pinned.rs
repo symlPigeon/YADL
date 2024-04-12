@@ -42,3 +42,10 @@ pub async fn reset_pin_window_size(app: tauri::AppHandle) -> Result<(), String> 
     pin_window.set_size(size).unwrap();
     Ok(())
 }
+
+#[tauri::command]
+pub async fn reset_pin_window_focus(app: tauri::AppHandle) -> Result<(), String> {
+    let pin_window = app.get_window("pin").unwrap();
+    pin_window.set_focus().unwrap();
+    Ok(())
+}
