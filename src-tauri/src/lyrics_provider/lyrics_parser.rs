@@ -13,17 +13,25 @@ fn parse_lyric_channel(lyric_lines: Vec<&str>) -> Vec<(i64, String)> {
         }
         let minute = minute.parse::<i64>().unwrap_or_default();
         let (second, millisec) = {
-            let sec_part = timestamp.split(':').last().unwrap_or_default();
-            if sec_part.is_empty() {
-                continue;
+            let splitted_timestamp: Vec<&str> = timestamp.split(':').collect();
+            // [mm:ss.SS] or [mm:ss:SS]
+            match splitted_timestamp.len() {
+                2 => {
+                    let parts = splitted_timestamp[1].split('.').collect::<Vec<&str>>();
+                    if parts.len() != 2 {
+                        continue;
+                    }
+                    let second = parts[0].parse::<i64>().unwrap_or_default();
+                    let millisec = parts[1].parse::<i64>().unwrap_or_default();
+                    (second, millisec)
+                },
+                3 => {
+                    let second = splitted_timestamp[1].parse::<i64>().unwrap_or_default();
+                    let millisec = splitted_timestamp[2].parse::<i64>().unwrap_or_default();
+                    (second, millisec)
+                },
+                _ => continue,
             }
-            let sec_part: Vec<&str> = sec_part.split('.').collect();
-            if sec_part.len() != 2 {
-                continue;
-            }
-            let second = sec_part[0].parse::<i64>().unwrap_or_default();
-            let millisec = sec_part[1].parse::<i64>().unwrap_or_default();
-            (second, millisec)
         };
         let timestamp = 1000 * (minute * 60 + second) + millisec;
         // remove timestamp part
