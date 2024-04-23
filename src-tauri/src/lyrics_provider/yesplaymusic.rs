@@ -42,6 +42,8 @@ pub async fn fetch_lyrics(metadata: &Metadata) -> RawLyrics {
         if let Some(lyric) = lrc.get("lyric") {
             // replace \\n with \n
             let lyric = lyric.to_string().replace("\\n", "\n");
+            // remove any existing \t
+            let lyric = lyric.replace("\\t", "");
             // add a fake timestamp to the end
             let lyric = format!("{}\n[9999:59.990]\n", lyric);
             lyrics.0 = Some(lyric.to_string());
@@ -51,6 +53,8 @@ pub async fn fetch_lyrics(metadata: &Metadata) -> RawLyrics {
         if let Some(tlyric) = tlyric.get("lyric") {
             // replace \\n with \n
             let tlyric = tlyric.to_string().replace("\\n", "\n");
+            // remove any existing \t
+            let tlyric = tlyric.replace("\\t", "");
             // add a fake timestamp to the end
             let tlyric = format!("{}\n[9999:59.990]\n", tlyric);
             lyrics.1 = Some(tlyric.to_string());
