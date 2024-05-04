@@ -25,7 +25,24 @@ window.addEventListener("DOMContentLoaded", () => {
                     label: "Themes",
                     subitems: [
                         {
-                            label: "Not Done Yet :(",
+                            label: "Light Blue",
+                            event: "menu_set_theme",
+                            payload: "light_blue",
+                        },
+                        {
+                            label: "Green",
+                            event: "menu_set_theme",
+                            payload: "green",
+                        },
+                        {
+                            label: "Yellow",
+                            event: "menu_set_theme",
+                            payload: "yellow",
+                        },
+                        {
+                            label: "Red",
+                            event: "menu_set_theme",
+                            payload: "red",
                         },
                     ],
                 },
