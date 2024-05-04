@@ -1,0 +1,19 @@
+.light-blue {
+    color: rgb(85, 164, 255);
+    text-shadow: #fc0 1px 0 5px;
+}
+
+.green {
+    color: #60e920;
+    text-shadow: #eaffe0 1px 0 5px;
+}
+
+.yellow {
+    color: #fbe80e;
+    text-shadow: #cba203 1px 0 5px;
+}
+
+.red {
+    color: #ff5a5a;
+    text-shadow: #ffc1c1 1px 0 5px;
+}

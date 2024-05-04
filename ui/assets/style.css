@@ -55,8 +55,6 @@ p {
     padding-top: 2px;
     border-radius: 6px;
     background: rgba(0, 0, 0, 0);
-    color: rgb(85, 164, 255);
-    text-shadow: #fc0 1px 0 5px;
     overflow-x: hidden;
     width: 100%;
 }
