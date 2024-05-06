@@ -8,8 +8,8 @@ window.addEventListener("DOMContentLoaded", () => {
     listen("menu_toggle_pinned", (e) => {
         invoke("toggle_window_pinned", {});
     });
-    listen("menu_exit_app", (e) => {
-        invoke("exit_app", {});
+    listen("menu_exit_app", async (e) => {
+        await invoke("exit_app", {});
     });
 
     window.addEventListener("contextmenu", async (event) => {
@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
                         {
                             label: "Light Blue",
                             event: "menu_set_theme",
-                            payload: "light_blue",
+                            payload: "light-blue",
                         },
                         {
                             label: "Green",

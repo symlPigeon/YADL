@@ -9,7 +9,7 @@
     },
     "package": {
         "productName": "yadl",
-        "version": "0.0.4"
+        "version": "0.0.5"
     },
     "tauri": {
         "allowlist": {
@@ -18,6 +18,15 @@
                 "all": false,
                 "startDragging": true,
                 "setIgnoreCursorEvents": true
+            },
+            "fs": {
+                "all": false,
+                "readFile": true,
+                "writeFile": true,
+                "readDir": true,
+                "createDir": true,
+                "exists": true,
+                "scope": ["$CONFIG/yadl"]
             }
         },
         "bundle": {

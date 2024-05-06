@@ -1,6 +1,6 @@
 {
     "name": "ypmdl",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Desktop Lyrics for Yesplaymusic.",
     "main": "src/index.js",
     "scripts": {
