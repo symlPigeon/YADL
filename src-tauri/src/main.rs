@@ -73,7 +73,11 @@ fn main() {
             app::right_menu::toggle_pause_resume,
             app::pinned::reset_pin_window_focus,
             app::app_conf::change_window_theme,
-            app::app_conf::get_init_theme
+            app::app_conf::get_init_theme,
+            app::custom_theme::start_custom_settings,
+            app::custom_theme::close_theme_setting,
+            app::custom_theme::save_theme_setting,
+            app::custom_theme::init_custom_theme,
         ])
         .plugin(tauri_plugin_context_menu::init())
         .run(tauri::generate_context!())

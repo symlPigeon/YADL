@@ -8,6 +8,8 @@ pub struct AppConf {
     pub app_window_last_width: u32,
     pub app_window_last_height: u32,
     pub app_last_theme: String,
+    pub custom_text_color: Option<String>,
+    pub custom_shadow_color: Option<String>
 }
 
 #[derive(Default)]
@@ -62,7 +64,9 @@ pub fn load_app_conf(app: &tauri::window::Window) -> Option<AppConf> {
         app_window_last_y: y,
         app_window_last_width: width,
         app_window_last_height: height,
-        app_last_theme: String::from("light_blue"),
+        app_last_theme: String::from("light-blue"),
+        custom_text_color: Some(String::from("##55a4ff")),
+        custom_shadow_color: Some(String::from("#fc0"))
     };
     let app_conf_str = serde_json::to_string(&app_conf).unwrap();
     std::fs::write(&config_file_path, app_conf_str).unwrap();

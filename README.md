@@ -9,6 +9,10 @@ YADL is a simple desktop lyrics application that displays lyrics on your linux d
 - Display lyrics on your desktop (if your media player gives the lyrics).
   - Currently, we only support lyrics from YesPlayMusic.
   - More lyrics sources will be supported in the future.
+  - Fully transparent background.
+- Customizable lyrics window.
+  - Customize the lyrics window's position, size. YADL will remember your settings and restore them next time.
+  - Customize the color of the lyrics, find the best color for your desktop.
 - Features which a desktop lyrics application should have.
 
 ### Screenshots
@@ -18,7 +22,6 @@ Desktop lyrics, with a transparent background and a `pin` button.
 ![](README.assets/screenshot1.jpg)
 
 ![](README.assets/screenshot2.jpg)
-
 
 ## Installation
 

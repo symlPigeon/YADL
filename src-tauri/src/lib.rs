@@ -4,3 +4,4 @@ pub mod playing_info;
 pub mod pinned;
 pub mod right_menu;
 pub mod app_conf;
+pub mod custom_theme;

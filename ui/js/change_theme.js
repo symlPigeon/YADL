@@ -25,6 +25,9 @@ window.addEventListener("DOMContentLoaded", async () => {
             case "red":
                 lyrics.className = "lyric red";
                 break;
+            case "custom-theme":
+                lyrics.className = "lyric custom-theme";
+                break;
             default:
                 is_valid_context = false;
                 break;
@@ -33,4 +36,28 @@ window.addEventListener("DOMContentLoaded", async () => {
             invoke("change_window_theme", { theme: context });
         }
     });
+
+    function modifyCSSRule(styleId, color, shadow) {
+        const styleElement = document.getElementById(styleId);
+        const styleSheet = styleElement.sheet;
+
+        for (let i = 0; i < styleSheet.cssRules.length; i++) {
+            const rule = styleSheet.cssRules[i];
+            if (rule.selectorText === ".custom-theme") {
+                rule.style.color = color;
+                rule.style.textShadow = `${shadow} 1px 0 5px`;
+                break;
+            }
+        }
+    }
+
+    listen("modify_custom_settings", (e) => {
+        context = e.payload;
+        text_color = context[0];
+        text_shadow = context[1];
+
+        modifyCSSRule("theme-style", text_color, text_shadow);
+    });
+
+    await invoke("init_custom_theme", {});
 });

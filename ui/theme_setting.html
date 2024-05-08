@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Theme Setting</title>
+        <meta charset="UTF-8" />
+        <style>
+            body {
+                background-color: rgba(255, 255, 255, 0.8)
+            }
+            .lyric {
+                display: inline;
+                word-break: keep-all;
+                text-align: center;
+                padding-top: 2px;
+                border-radius: 6px;
+                overflow-x: hidden;
+                width: 100%;
+            }
+            .lyric p {
+                margin: 5px;
+                white-space: nowrap;
+                cursor: pointer;
+                font-family: WenQuanYi Micro Hei, sans-serif;
+                font-weight: bold;
+                font-size: 24px;
+                text-align: center;
+
+            }
+            .setting-groups {
+                display: grid;
+                justify-content: space-between;
+                flex-direction: column;
+                align-items: start;
+                grid-template-columns:  60%;
+                grid-gap: 5%;
+                margin: 10px;
+            }
+            .color-input {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+            .item input {
+                flex: 1;
+            }
+            .item label {
+                align-self: center;
+            }
+            .lyric-container {
+                display: flex;
+                padding: 10px;
+                justify-content: center;
+                background-color: #ffffff;
+                margin: 20px;
+            }
+            .button-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+            }
+            button {
+                padding: 5px 10px;
+                border-radius: 1px;
+                border: none;
+                font-size: 16px
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Theme settings</h2>
+        <hr/>
+        <div class="setting-groups">
+            <div class="color-input">
+                <label for="text-color-input">Text Color:</label>
+                <input type="color" id="text-color-input" />
+            </div>
+            <div class="color-input">
+                <label for="text-shadow-color-input">Text Shadow Color:</label>
+                <input type="color" id="text-shadow-color-input" />
+            </div>
+        </div>
+        <hr/>
+        <div class="lyric-container">
+            <div id="lyric" class="lyric">
+                <p>Enjoy Your Music!</p>
+            </div>
+        </div>
+        <hr/>
+        <div class="button-container">
+            <button id="save-button">Save</button>
+            <button id="reset-button">Cancel</button>
+        </div>
+
+        <script>
+            const { invoke } = window.__TAURI__.tauri;
+
+            const confirmButton = document.getElementById("save-button");
+            const cancelButton = document.getElementById("reset-button");
+            const previewText = document.getElementById("lyric");
+            const textColorInput = document.getElementById("text-color-input");
+            const textShadowColorInput = document.getElementById(
+                "text-shadow-color-input"
+            );
+
+            function updatePreview() {
+                const textColor = textColorInput.value;
+                const textShadow = textShadowColorInput.value;
+
+                previewText.style.color = textColor;
+                previewText.style.textShadow = `${textShadow} 1px 0 5px`;
+            }
+
+            confirmButton.addEventListener("click", async () => {
+                const textColor = String(textColorInput.value);
+                const shadowColor = String(textShadowColorInput.value);
+
+                await invoke("save_theme_setting", {
+                    textColor,
+                    shadowColor,
+                });
+            });
+
+            cancelButton.addEventListener("click", () => {
+                invoke("close_theme_setting", {});
+            });
+
+            textColorInput.addEventListener("input", updatePreview);
+            textShadowColorInput.addEventListener("input", updatePreview);
+        </script>
+    </body>
+</html>
