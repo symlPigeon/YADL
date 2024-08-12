@@ -1,6 +1,6 @@
 {
     "name": "ypmdl",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Desktop Lyrics for Yesplaymusic.",
     "main": "src/index.js",
     "scripts": {
@@ -10,6 +10,6 @@
     "author": "symlpigeon",
     "license": "WTFPL",
     "devDependencies": {
-        "@tauri-apps/cli": "^1.5.11"
+        "@tauri-apps/cli": "1.6.0"
     }
 }
